@@ -1,12 +1,12 @@
 # expo-image-crop
 
 ## Как запустить?
-```js
-// install dependencies
+```zsh
+# install dependencies
 yarn
 ```
-```js
-// start development server
+```zsh
+# start development server
 yarn start
 ```
 
