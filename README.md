@@ -40,3 +40,8 @@ yarn start
 ## Demo <a name = "demo"></a>
 
 [<img src="demo/screenshot.PNG" width="250"/>](screenshot.PNG)
+
+
+
+https://github.com/awpogodin/expo-image-crop/assets/37239276/17da5e33-1d0e-4858-81ba-10755821cb73
+
