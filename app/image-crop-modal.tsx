@@ -1,6 +1,6 @@
 import * as MediaLibrary from "expo-media-library";
 import { useLocalSearchParams } from "expo-router";
-import { router } from 'expo-router';
+import { router } from "expo-router";
 import { captureRef } from "react-native-view-shot";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -48,8 +48,8 @@ const CircleOverlay: React.FC<WrappedSvgProps> = ({ radius, cx, cy }) => (
 );
 
 export default function ImageCropModal() {
-  const [isError, setIsError] = useState(false)
-  const { url } = useLocalSearchParams<{ url?: string}>()
+  const [isError, setIsError] = useState(false);
+  const { url } = useLocalSearchParams<{ url?: string }>();
   const [status, requestPermission] = MediaLibrary.usePermissions();
   const insets = useSafeAreaInsets();
   const dimensions = useWindowDimensions();
@@ -57,7 +57,7 @@ export default function ImageCropModal() {
   const [initialImageSize, setInitialImageSize] = useState<{
     width: number;
     height: number;
-    scale: number
+    scale: number;
   }>({ width: 0, height: 0, scale: 1 });
 
   const imageRef = useRef(null);
@@ -76,11 +76,9 @@ export default function ImageCropModal() {
 
     // #region Вычисление масштаба, чтобы картинка заполнила рамку
     let scale = 1;
-    if (width < circleOverlayDiameter) {
-      scale = circleOverlayDiameter / width
-    }
-    if (height < circleOverlayDiameter) {
-      scale = circleOverlayDiameter / height
+    const minSize = Math.min(width, height);
+    if (minSize < circleOverlayDiameter) {
+      scale = circleOverlayDiameter / minSize;
     }
     // #endregion
 
@@ -93,7 +91,7 @@ export default function ImageCropModal() {
 
   useEffect(() => {
     scale.value = initialImageSize.scale;
-  }, [initialImageSize])
+  }, [initialImageSize]);
 
   const circleOverlayDiameter = dimensions.width - 16;
 
@@ -136,7 +134,7 @@ export default function ImageCropModal() {
     .onEnd((event) => {
       const possibleScale = savedScale.value * event.scale;
 
-      // #region Проверяем, что картинка с новым масштабом не меньше рамки и не превышает макс. значение масштаба 
+      // #region Проверяем, что картинка с новым масштабом не меньше рамки и не превышает макс. значение масштаба
       if (initialImageSize.width * possibleScale < circleOverlayDiameter) {
         scale.value = withSpring(initialImageSize.scale);
       }
@@ -187,9 +185,9 @@ export default function ImageCropModal() {
         Math.abs(realImageWidth - circleOverlayDiameter) / 2;
       const maxTranslateY =
         Math.abs(realImageHeight - circleOverlayDiameter) / 2;
-        // #endregion
+      // #endregion
 
-        // #region Проверяем, что картинка не выходит за пределы рамки, иначе ограничиваем сдвиг
+      // #region Проверяем, что картинка не выходит за пределы рамки, иначе ограничиваем сдвиг
       if (possibleNewTranslateX > maxTranslateX) {
         translateX.value = withSpring(maxTranslateX);
       }
@@ -218,7 +216,7 @@ export default function ImageCropModal() {
       await MediaLibrary.saveToLibraryAsync(localUri);
       if (localUri) {
         alert("Сохранено!");
-        router.back()
+        router.back();
       }
     } catch (e) {
       console.log(e);
@@ -239,15 +237,24 @@ export default function ImageCropModal() {
   if (!url || isError) {
     return (
       <View style={styles.wrapper}>
-        <Text style={{color: colors.white, textAlign: 'center'}}>Изображение не выбрано</Text>
+        <Text style={{ color: colors.white, textAlign: "center" }}>
+          Изображение не выбрано
+        </Text>
       </View>
-    )
+    );
   }
 
   return (
     <View style={[styles.wrapper, { paddingBottom: insets.bottom }]}>
       <View style={styles.container} onLayout={handleOnLayout}>
-        <View style={{flex: 1, width: circleOverlayDiameter, maxHeight: circleOverlayDiameter}} ref={imageRef}>
+        <View
+          style={{
+            flex: 1,
+            width: circleOverlayDiameter,
+            maxHeight: circleOverlayDiameter,
+          }}
+          ref={imageRef}
+        >
           <GestureDetector gesture={composedGestures}>
             <Animated.View style={imageContainerAnimatedStyle}>
               <Animated.Image
@@ -257,8 +264,8 @@ export default function ImageCropModal() {
                 style={[
                   imageAnimatedStyle,
                   {
-                    width: '100%',
-                    height: '100%',
+                    width: "100%",
+                    height: "100%",
                   },
                 ]}
                 resizeMethod="scale"
