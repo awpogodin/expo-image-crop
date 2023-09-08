@@ -163,9 +163,8 @@ export default function ImageCropModal() {
       const possibleNewTranslateX = savedTranslateX.value + event.translationX;
       const possibleNewTranslateY = savedTranslateY.value + event.translationY;
 
-      let currentScale = scale.value;
-
       // #region Проверяем, что картинка с новым масштабом не меньше рамки и не превышает макс. значение масштаба
+      let currentScale = scale.value;
       if (initialImageSize.width * currentScale < circleOverlayDiameter) {
         currentScale = initialImageSize.scale;
       }
