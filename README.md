@@ -1,25 +1,12 @@
 # expo-image-crop
 
-## Как запустить?
-```zsh
-# install dependencies
-yarn
-```
-```zsh
-# start development server
-yarn start
-```
-
-
-# expo-image-crop
-
 ## Table of Contents
 + [About](#about)
 + [Getting Started](#getting_started)
 + [Demo](#demo)
 
 ## About <a name = "about"></a>
-Приложение для обрезки изображений. Ссылка на картинку замокана. По завершении обрезки, сохраняется обрезанное изображение .
+Приложение для обрезки изображений. Ссылка на картинку замокана. По завершении обрезки, сохраняется обрезанное изображение.
 
 ## Getting Started <a name = "getting_started"></a>
 
@@ -27,13 +14,13 @@ yarn start
 
 Установить зависимости
 
-```
+```zsh
 yarn
 ```
 
 Запустить development server
 
-```
+```zsh
 yarn start
 ```
 
